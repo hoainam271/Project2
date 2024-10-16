@@ -1,6 +1,7 @@
 package com.javaweb.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -194,13 +195,24 @@ public class BuildingAPI {
 //		return result;
 //	}
 	
+	
+	
+//	@RequestParam(name="name" , required= false) String name
+//	,@RequestParam(name="street", required = false) String street
+//	,@RequestParam(name="ward", required= false) Long ward 
+//	,@RequestParam(name="districtid", required= false) Integer districtId 
+//	,@RequestParam(name="numberOfBasement", required= false) Integer numberOfBasement 
+//	,@RequestParam(name="floorArea", required= false) Integer floorArea
+//	,@RequestParam(name="rentPrice", required= false) Integer rentPrice
+//	,@RequestParam(name="rentPriceDescription", required= false) String rentPriceDescription 
+//	,@RequestParam(name="managerName", required= false) String managerName 
+//	,@RequestParam(name="managerPhoneNumber", required= false) Long managerPhoneNumber
 	@Autowired
 	private BuildingService buildingService;
 	@GetMapping(value="/api/building/")
-	public List<BuildingDTO> getBuilding(@RequestParam(name="name" , required= false) String name
-			,@RequestParam(name="districtid", required= false) Long district 
-			,@RequestParam(name="typeCode", required = false) List<String> typeCode){
-		List<BuildingDTO> result = buildingService.findAll(name, district);
+	public List<BuildingDTO> getBuilding(@RequestParam Map<String,Object> params,
+			@RequestParam(name="typeCode", required = false) List<String> typeCode){
+		List<BuildingDTO> result = buildingService.findAll(params, typeCode);
 		return result;
 	}
 	
