@@ -1,46 +1,154 @@
 package com.javaweb.repository.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+@Entity // đánh dấu nó là 1 entity
+@Table(name="building") // đánh dấu nó là table có tên là building
 public class BuildingEntity {
+	
+	@Id // anotation này để đánh dấu nó là primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // tự động tăng dần
 	private Long id;
+	
+	@Column(name="name")// anotation này để nó tạo 1 cột column
+	private String name;
+	
+	@Column(name="street")
+	private String street;
+	
+	@Column(name="ward")
+	private String ward;
+	
+	
+	
+	@Column(name="structure")
+	private String struture;
+	
+	@Column(name="numberofbasement")
+	private Integer numberOfBasement;
+	
+	@Column(name="floorarea")
+	private Integer floorarea;
+	
+	@Column(name="direction")
+	private String direction;
+	
+	@Column(name="level")
+	private Integer level;
+	
+	@Column(name="rentprice")
+	private Integer rentprice;
+	
+	@Column(name="rentpricedescription")
+	private String rentpricedescription;
+	
+	@Column(name="servicefee")
+	private Integer servicefee;
+	
+	@Column(name="carfee")
+	private Integer carfee;
+	
+	@Column(name="motorbikefee")
+	private Integer motorbikefee;
+	
+	@Column(name="overtimefee")
+	private Integer overtimefee;
+	
+	@Column(name="waterfee")
+	private Integer waterfee;
+	
+	@Column(name="electricityfee")
+	private Integer electricityfee;
+	
+	@Column(name="deposit")
+	private Integer deposit;
+	
+	@Column(name="payment")
+	private Integer payment;
+	
+	@Column(name="renttime")
+	private Integer renttime;
+	
+	@Column(name="decorationtime")
+	private Integer decorationtime;
+	
+	@Column(name="brokeragefee")
+	private Integer brokeragefee;
+	
+	@Column(name="note")
+	private String note;
+	
+	@Column(name="linkofbuilding")
+	private String linkofbuilding;
+	
+	@Column(name="map")
+	private String map;
+	
+	@Column(name="image")
+	private String image;
+	
+	@Column(name="createddate")
+	private Date createddate;
+	
+	@Column(name="modifieddate")
+	private Date modifieddate;
+	
+	@Column(name="createdby")
+	private String createdby;
+	
+	@Column(name="managername")
+	private String managername;
+	
+	@Column(name="managerphonenumber")
+	private Long managerphonenumber;
+	
+	// khi join column nó sẽ tự tạo luôn cái coslumn 
+	@ManyToOne
+	@JoinColumn(name="districtid")
+	private DistrictEntity district; // bên kia mapped như nào thì bên này phải như thế
+	
+	@OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
+	private List<RentAreaEntity> items = new ArrayList<>();
+	
+	
+	public List<RentAreaEntity> getItems() {
+		return items;
+	}
+	public void setItems(List<RentAreaEntity> items) {
+		this.items = items;
+	}
+	public Long getManagerphonenumber() {
+		return managerphonenumber;
+	}
+	public void setManagerphonenumber(Long managerphonenumber) {
+		this.managerphonenumber = managerphonenumber;
+	}
+	public DistrictEntity getDistrict() {
+		return district;
+	}
+	public void setDistrict(DistrictEntity district) {
+		this.district = district;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	private String name;
-	private String street;
-	private String ward;
-	private Integer districtid;
-	private String struture;
-	private Integer numberOfBasement;
-	private Integer floorarea;
-	private String direction;
-	private Integer level;
-	private Integer rentprice;
-	private String rentpricedescription;
-	private Integer servicefee;
-	private Integer carfee;
-	private Integer motorbikefee;
-	private Integer overtimefee;
-	private Integer waterfee;
-	private Integer electricityfee;
-	private Integer deposit;
-	private Integer payment;
-	private Integer renttime;
-	private Integer decorationtime;
-	private Integer brokeragefee;
-	private String note;
-	private String linkofbuilding;
-	private String map;
-	private String image;
-	private Date createddate;
-	private Date modifieddate;
-	private String createdby;
-	private String managername;
-	private Long managerPhoneNumber;
 	public String getName() {
 		return name;
 	}
@@ -59,12 +167,7 @@ public class BuildingEntity {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-	public Integer getDistrictid() {
-		return districtid;
-	}
-	public void setDistrictid(Integer districtid) {
-		this.districtid = districtid;
-	}
+	
 	public String getStruture() {
 		return struture;
 	}
@@ -222,10 +325,10 @@ public class BuildingEntity {
 		this.managername = managername;
 	}
 	public Long getManagerPhoneNumber() {
-		return managerPhoneNumber;
+		return managerphonenumber;
 	}
-	public void setManagerPhoneNumber(Long managerPhoneNumber) {
-		this.managerPhoneNumber = managerPhoneNumber;
+	public void setManagerPhoneNumber(Long managerphonenumber) {
+		this.managerphonenumber = managerphonenumber;
 	}
 
 	
