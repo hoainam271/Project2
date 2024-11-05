@@ -25,7 +25,6 @@ import com.javaweb.repository.custom.BuildingRepositoryCustom;
 import com.javaweb.repository.entity.BuildingEntity;
 
 @Repository // cái này của spring framework
-@Primary
 public class BuildingRepositoryImpl implements BuildingRepositoryCustom {
 	@PersistenceContext
 	private EntityManager entityManager;

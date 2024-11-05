@@ -32,8 +32,8 @@ import com.javaweb.service.BuildingService;
 public class BuildingAPI {
 	@Autowired
 	private BuildingService buildingService;
-	@Value("${dev.do}")
-	private String data;
+//	@Value("${dev.do}")
+//	private String data;
 	
 	
 	@GetMapping(value="/api/building/")
