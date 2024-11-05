@@ -29,7 +29,10 @@ public class BuildingServiceImpl implements BuildingService{
 	public List<BuildingDTO> findAll(Map <String,Object> params, List<String> typeCode) {
 		// TODO Auto-generated method stub
 		BuildingSearchBuilder buildingSearchBuilder =buildingSearchBuilderConvert.toBuildingSearchBuilder(params, typeCode); 
-		List<BuildingEntity> buildingEntities = buildingRepository.findAll(buildingSearchBuilder);
+//		List<BuildingEntity> buildingEntities = buildingRepository.findAll(); // hàm findAll này của StringDataJPA khi ta khai báo bên BuildingRepository
+//		BuildingEntity buildingEntities = buildingRepository.findById(1L).get();  // tìm theo ID
+		
+		List<BuildingEntity> buildingEntities = buildingRepository.findAll(buildingSearchBuilder); // khi custom thì nó ra
 		List<BuildingDTO> result= new ArrayList<BuildingDTO>();
 		for(BuildingEntity item : buildingEntities){
 			BuildingDTO building = buildingDTOConverter.toBuildingDTO(item);

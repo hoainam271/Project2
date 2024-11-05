@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.model.BuildingDTO;
 import com.javaweb.model.BuildingRequestDTO;
+import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.repository.entity.DistrictEntity;
 import com.javaweb.service.BuildingService;
@@ -43,6 +44,28 @@ public class BuildingAPI {
 	}
 	
 	
+	
+	
+	@Autowired
+	BuildingRepository buildingRepository;
+	
+	// tìm theo id
+//	@GetMapping(value="/api/building/{id}") 
+//	public BuildingDTO getBuildingById(@PathVariable Long id){
+//		BuildingDTO result = new BuildingDTO();
+//		BuildingEntity building= buildingRepository.findById(id).get();
+//		return result;
+//	}
+//	
+	
+	// tìm theo name
+//	@GetMapping(value="/api/building/{name}")
+//	public BuildingDTO getBuildingByName(@PathVariable String name) {
+//		BuildingDTO result = new BuildingDTO();
+//		List<BuildingEntity> builidng = buildingRepository.findByNameContaining(name);
+//		return result;
+//	}
+
 	// thêm or sửa thì nên đẩy dạng body
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -69,32 +92,80 @@ public class BuildingAPI {
 		System.out.println("ok");
 	}
 
-	// Update
-	@PutMapping(value="/api/building/")
+	// Update dữ liệu
+//	@PutMapping(value="/api/building/")
+//	@Transactional
+//	public void updateBuilding(@RequestBody BuildingRequestDTO buildingRequestDTO) {
+//		BuildingEntity buildEntity = new BuildingEntity();
+//		//set cứng id là 1 có định dạng Long
+//		buildEntity.setId(5L); // lấy id =5
+//		buildEntity.setName(buildingRequestDTO.getName());
+//		buildEntity.setStreet(buildingRequestDTO.getStreet());
+//		buildEntity.setWard(buildingRequestDTO.getWard());
+//		DistrictEntity districtEntity = new DistrictEntity();
+//		districtEntity.setId(buildingRequestDTO.getDistrictId());
+//		buildEntity.setDistrict(districtEntity);
+//		entityManager.merge(buildEntity);
+//		System.out.println("ok");
+//	}
+	
+//		// đẩy lên 1 dữ liệu
+//	@PutMapping(value="/api/building/")
+//	@Transactional
+//	public void updateBuilding(@RequestBody BuildingRequestDTO buildingRequestDTO) {
+//		BuildingEntity buildEntity = new BuildingEntity();
+//		//set cứng id là 1 có định dạng Long
+//		buildEntity.setId(5L);
+//		buildEntity.setName(buildingRequestDTO.getName());
+//		buildEntity.setStreet(buildingRequestDTO.getStreet());
+//		buildEntity.setWard(buildingRequestDTO.getWard());
+//		DistrictEntity districtEntity = new DistrictEntity();
+//		districtEntity.setId(buildingRequestDTO.getDistrictId());
+//		buildEntity.setDistrict(districtEntity);
+//		buildingRepository.save(buildEntity);
+//		System.out.println("ok");
+//		}	
+	
+	
+	
+//	cập nhập lại dữ liệu theo id
+		@PutMapping(value="/api/building/")
+		@Transactional
+		public void updateBuilding(@RequestBody BuildingRequestDTO buildingRequestDTO) {
+			BuildingEntity buildEntity = buildingRepository.findById(buildingRequestDTO.getId()).get(); // nếu thêm 1 dữ liệu mới thì bỏ dòng tìm kiếm này
+//			BuildingEntity buildEntity = new BuildingEntity(); // thay vào đó dùng hàm này
+			//set cứng id là 1 có định dạng Long
+			buildEntity.setName(buildingRequestDTO.getName());
+			buildEntity.setStreet(buildingRequestDTO.getStreet());
+			buildEntity.setWard(buildingRequestDTO.getWard());
+			DistrictEntity districtEntity = new DistrictEntity();
+			districtEntity.setId(buildingRequestDTO.getDistrictId());
+			buildEntity.setDistrict(districtEntity);
+			buildingRepository.save(buildEntity);
+			System.out.println("ok");
+			}	
+	
+	// hàm xóa theo 1 id 
+//	@DeleteMapping(value="/api/building/{id}")
+//	public void deleteBuilding(@PathVariable Long id) { // @PathVariable có thể để cả 1 list : @PathVariable Long[] id
+//		
+//		// cach 1
+////		BuildingEntity buildingEntity = entityManager.find(BuildingEntity.class, id);
+////		entityManager.remove(buildingEntity);
+////		System.out.println(data);
+//		
+//		
+//		// cach 2
+//		buildingRepository.deleteById(id);
+//	}
+	
+	
+	// nếu muốn xóa 1 list hoặc mảng id thì làm như sau
+	@DeleteMapping(value="/api/building/{ids}")
 	@Transactional
-	public void updateBuilding(@RequestBody BuildingRequestDTO buildingRequestDTO) {
-		BuildingEntity buildEntity = new BuildingEntity();
-		//set cứng id là 1 có định dạng Long
-		buildEntity.setId(5L);
-		buildEntity.setName(buildingRequestDTO.getName());
-		buildEntity.setStreet(buildingRequestDTO.getStreet());
-		buildEntity.setWard(buildingRequestDTO.getWard());
-		DistrictEntity districtEntity = new DistrictEntity();
-		districtEntity.setId(buildingRequestDTO.getDistrictId());
-		buildEntity.setDistrict(districtEntity);
-		entityManager.merge(buildEntity);
-		System.out.println("ok");
+	public void deleteByListId(@PathVariable Long[] ids) {
+		buildingRepository.deleteByIdIn(ids);
 	}
-	
-	
-	@DeleteMapping(value="/api/building/{id}")
-	@Transactional
-	public void deleteBuilding(@PathVariable Long id) { // @PathVariable có thể để cả 1 list : @PathVariable Long[] id
-		BuildingEntity buildingEntity = entityManager.find(BuildingEntity.class, id);
-		entityManager.remove(buildingEntity);
-		System.out.println(data);
-	}
-	
 	
 	
 	
