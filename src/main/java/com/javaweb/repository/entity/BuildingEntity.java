@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -104,7 +105,7 @@ public class BuildingEntity {
 	@Column(name="createddate")
 	private Date createddate;
 	
-	@Column(name="modifieddate")
+	@Column(name="modifieddate" )
 	private Date modifieddate;
 	
 	@Column(name="createdby")
@@ -116,15 +117,29 @@ public class BuildingEntity {
 	@Column(name="managerphonenumber")
 	private Long managerphonenumber;
 	
-	// khi join column nó sẽ tự tạo luôn cái coslumn 
+	// khi join column nó sẽ tự tạo luôn cái column 
 	@ManyToOne
 	@JoinColumn(name="districtid")
 	private DistrictEntity district; // bên kia mapped như nào thì bên này phải như thế
 	
+	public List<RentTypeEntity> getRenttypes() {
+		return renttypes;
+	}
+	public void setRenttypes(List<RentTypeEntity> renttypes) {
+		this.renttypes = renttypes;
+	}
 	@OneToMany(mappedBy = "building", fetch = FetchType.LAZY)
 	private List<RentAreaEntity> items = new ArrayList<>();
 	
+	@ManyToMany(mappedBy="buildings",fetch=FetchType.LAZY)
+	private List<RentTypeEntity> renttypes= new ArrayList<>();
 	
+	public List<RentTypeEntity> getRentTypes() {
+		return renttypes;
+	}
+	public void setRentTypes(List<RentTypeEntity> renttypes) {
+		this.renttypes = renttypes;
+	}
 	public List<RentAreaEntity> getItems() {
 		return items;
 	}

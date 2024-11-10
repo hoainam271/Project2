@@ -7,7 +7,7 @@ public class BuildingDTO {
 	private String name;
 	private String street;
 	private String ward;
-	private Integer districtid;
+	private Long districtid;
 	private String struture;
 	private Integer numberOfBasement;
 	private Integer floorarea;
@@ -53,10 +53,10 @@ public class BuildingDTO {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-	public Integer getDistrictid() {
+	public Long getDistrictid() {
 		return districtid;
 	}
-	public void setDistrictid(Integer districtid) {
+	public void setDistrictid(Long districtid) {
 		this.districtid = districtid;
 	}
 	public String getStruture() {
