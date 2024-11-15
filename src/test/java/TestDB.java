@@ -30,7 +30,7 @@ public class TestDB {
 	        // Test này sẽ ném ra SQLException do thông tin không đúng
 	        assertNull(ConnectionUtils.getMySQLConnection(hostName, user, pass));
 	    } catch (SQLException e) {
-	        // Đây là trường hợp sai, không cần xử lý gì, nhưng bạn có thể kiểm tra thông báo lỗi nếu muốn
+	        // Đây là trường hợp sai, không cần xử lý gì, nhưng có thể kiểm tra thông báo lỗi nếu muốn
 	        System.out.println("Expected SQLException: " + e.getMessage());
 	    }
 	}
