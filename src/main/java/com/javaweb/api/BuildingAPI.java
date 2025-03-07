@@ -54,6 +54,7 @@ public class BuildingAPI {
 	
 //	@RequestMapping(value="/api/building/", method = RequestMethod.GET)
 //	@ResponseBody
+	// cái anotation kia để chuyển thành dạng json, thì fe mới có thể hiểu được
 //	public BuildingDTO getBuilding(@RequestParam(name="name", required=false) String name,
 //							@RequestParam(name="numberOfBasement", required=false) Integer numberOfBasement,
 //							@RequestParam(name="ward", required=false) String ward
