@@ -13,7 +13,7 @@ import com.javaweb.repository.RentAreaRepository;
 import com.javaweb.repository.entity.BuildingEntity;
 import com.javaweb.repository.entity.RentAreaEntity;
 
-@Component
+@Component // đánh dấu 1 java class là beans(kh có hàm khởi tạo) 
 public class BuildingDTOConverter {
 	@Autowired
 	private DistrictRepository districtRepository;

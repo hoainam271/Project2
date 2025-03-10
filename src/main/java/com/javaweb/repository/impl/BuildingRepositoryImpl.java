@@ -37,7 +37,7 @@ public class BuildingRepositoryImpl implements BuildingRepository{
 	}
 	// field của chính những cái bảng mà kh cần inner join 
 	public static void queryNomal(Map<String, Object> params, StringBuilder where) {
-		for(Map.Entry<String, Object> it:params.entrySet()) {
+		for(Map.Entry<String, Object> it : params.entrySet()) {
 			if(!it.getKey().equals("staffId") && !it.getKey().equals("typeCode") 
 					&& !it.getKey().startsWith("area") && !it.getKey().startsWith(("rentPrice"))){
 				String value=it.getValue().toString();
