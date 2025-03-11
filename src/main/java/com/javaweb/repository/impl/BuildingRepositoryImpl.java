@@ -37,10 +37,10 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 	public static void queryNomal(BuildingSearchBuilder buildingSearchBuilder, StringBuilder where) {
 //			
 		try {
-			// java refection
+			// java reflection
 			Field[] fields = BuildingSearchBuilder.class.getDeclaredFields();
 			for (Field item : fields) {
-				item.setAccessible(true);
+				item.setAccessible(true); // sd để lấy các field ra, cho phép truy cập( nếu kh có thì mặc định là false và có thể kh thể truy cập được)
 				String fieldName = item.getName();
 				if (!fieldName.equals("staffId") && !fieldName.equals("typeCode") && !fieldName.startsWith("area")
 						&& !fieldName.startsWith(("rentPrice"))) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BuildingSearchBuilder {
+	// builderPattern chỉ có hàm getter, kh có setter
 	private String name;
 	private Long floorArea;
 	private String ward;
@@ -20,6 +21,8 @@ public class BuildingSearchBuilder {
 	private Long areaTo;
 	private Long staffId;
 	
+	
+	// có 1 hàm contructor Builder ở bên dưới
 	public BuildingSearchBuilder(Builder builder ) {
 		this.name=builder.name;
 		this.floorArea=builder.floorArea;
@@ -78,6 +81,8 @@ public class BuildingSearchBuilder {
 	public Long getStaffId() {
 		return staffId;
 	}
+	
+	// hàm Builder có các giá trị setter với các field map 11 với các field ở trên(nó là 1, copy xuống)
 	public static class Builder{
 		private String name;
 		private Long floorArea;
@@ -151,6 +156,7 @@ public class BuildingSearchBuilder {
 			this.staffId = staffId;
 			return this;
 		}
+		// hàm khởi tạo
 		public BuildingSearchBuilder build() {
 			return new BuildingSearchBuilder(this);
 		}
