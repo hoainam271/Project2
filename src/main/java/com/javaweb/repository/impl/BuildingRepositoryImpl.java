@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
@@ -23,10 +24,10 @@ import com.javaweb.repository.BuildingRepository;
 import com.javaweb.repository.entity.BuildingEntity;
 
 @Repository // cái này của spring framework
-
+// @Primary // cái này để khi có 2 cái findAll ở cùng 1 respo thì nó sẽ nhảy vào cái có anno này
 public class BuildingRepositoryImpl implements BuildingRepository {
-	@PersistenceContext
-	private EntityManager entityManager;
+	@PersistenceContext // nó giúp chạy đúng luồng vào đây(của jpa)
+	private EntityManager entityManager; 
 	
 	public static void joinTable(BuildingSearchBuilder buildingSearchBuilder, StringBuilder sql) {
 		Long staffId = buildingSearchBuilder.getStaffId();
@@ -129,7 +130,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 //		where.append(" GROUP BY b.id; ");
 		where.append(" ; ");
 		sql.append(where);
-		Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class);
+		Query query = entityManager.createNativeQuery(sql.toString(), BuildingEntity.class); // SQL Native
 		return query.getResultList();
 	}
 

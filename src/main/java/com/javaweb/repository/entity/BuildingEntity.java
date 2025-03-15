@@ -34,8 +34,6 @@ public class BuildingEntity {
 	@Column(name="ward")
 	private String ward;
 	
-	
-	
 	@Column(name="structure")
 	private String struture;
 	
